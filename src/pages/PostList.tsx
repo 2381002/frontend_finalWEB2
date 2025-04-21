@@ -104,14 +104,14 @@ const PostList: React.FC = () => {
   if (error) return <div className="text-red-600 text-center py-8">{error}</div>;
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-4">
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-10 gap-4">
-        <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 drop-shadow-lg">Blog Posts</h1>
-        <div className="flex gap-3">
-          <Link to="/posts/create" className="flex items-center gap-2 bg-gradient-to-r from-green-400 to-green-600 text-white px-5 py-2 rounded-xl shadow hover:scale-105 hover:from-green-500 hover:to-green-700 transition">
+    <div className="max-w-5xl mx-auto py-6 px-2 sm:px-4 md:px-8">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 drop-shadow-lg text-left md:text-center w-full md:w-auto">Blog Posts</h1>
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full md:w-auto">
+          <Link to="/posts/create" className="flex items-center justify-center gap-2 bg-gradient-to-r from-green-400 to-green-600 text-white px-4 sm:px-5 py-2 rounded-xl shadow hover:scale-105 hover:from-green-500 hover:to-green-700 transition text-base sm:text-lg w-full sm:w-auto">
             <span className="material-icons">add_circle</span> Add Post
           </Link>
-          <Link to="/tags" className="flex items-center gap-2 bg-gradient-to-r from-blue-400 to-blue-700 text-white px-5 py-2 rounded-xl shadow hover:scale-105 hover:from-blue-500 hover:to-blue-800 transition">
+          <Link to="/tags" className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-400 to-blue-700 text-white px-4 sm:px-5 py-2 rounded-xl shadow hover:scale-105 hover:from-blue-500 hover:to-blue-800 transition text-base sm:text-lg w-full sm:w-auto">
             <span className="material-icons">local_offer</span> Tags
           </Link>
         </div>
@@ -126,10 +126,10 @@ const PostList: React.FC = () => {
           loader={<div className="text-center py-4">Loading...</div>}
           endMessage={<div className="text-center py-4 text-gray-400">No more posts</div>}
         >
-          <div className="grid gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.map(post => (
-              <div key={post.id} className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-7 border-2 border-blue-200 hover:border-purple-400 group relative overflow-hidden">
-                <Link to={`/posts/${post.id}`} className="text-3xl font-extrabold text-indigo-700 group-hover:text-purple-700 transition-colors duration-200 drop-shadow-lg">
+              <div key={post.id} className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-4 sm:p-6 md:p-7 border-2 border-blue-200 hover:border-purple-400 group relative overflow-hidden flex flex-col h-full">
+                <Link to={`/posts/${post.id}`} className="text-xl sm:text-2xl md:text-3xl font-extrabold text-indigo-700 group-hover:text-purple-700 transition-colors duration-200 drop-shadow-lg break-words mb-1">
                   {post.title}
                 </Link>
                 <div className="text-gray-500 text-xs mb-3 mt-2 flex items-center gap-2">
