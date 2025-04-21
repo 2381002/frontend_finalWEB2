@@ -7,12 +7,18 @@ interface User {
   username: string;
 }
 
+interface Tag {
+  id: number;
+  name: string;
+}
+
 interface Post {
   id: number;
   title: string;
   content: string;
   user: User;
   created_at: string;
+  tags?: Tag[];
 }
 
 const PostEdit: React.FC = () => {
@@ -21,25 +27,37 @@ const PostEdit: React.FC = () => {
   const [form, setForm] = useState<Pick<Post, 'title' | 'content'>>({ title: '', content: '' });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useState<number[]>([]);
 
   useEffect(() => {
-    const fetchPost = async () => {
+    const fetchData = async () => {
       try {
-        const res = await AxiosInstance.get(`/api/post/${id}`);
-        setForm({ title: res.data.title, content: res.data.content });
+        // Fetch all tags
+        const tagsRes = await AxiosInstance.get('/api/tags');
+        const allTags = Array.isArray(tagsRes.data) ? tagsRes.data : tagsRes.data.tags || [];
+        setTags(allTags);
+        // Fetch post data
+        const postRes = await AxiosInstance.get(`/api/post/${id}`);
+        setForm({ title: postRes.data.title, content: postRes.data.content });
+        setSelectedTags(postRes.data.tags ? postRes.data.tags.map((t: Tag) => t.id) : []);
       } catch (err) {
-        setError('Failed to fetch post');
+        setError('Failed to fetch post or tags');
       } finally {
         setLoading(false);
       }
     };
-    fetchPost();
+    fetchData();
   }, [id]);
+
+  const handleTagChange = (tagId: number) => {
+    setSelectedTags(prev => prev.includes(tagId) ? prev.filter(tid => tid !== tagId) : [...prev, tagId]);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await AxiosInstance.put(`/api/post/${id}`, form);
+      await AxiosInstance.put(`/api/post/${id}`, { ...form, tags: selectedTags });
       navigate('/posts');
     } catch (err) {
       setError('Failed to update post');
@@ -68,6 +86,23 @@ const PostEdit: React.FC = () => {
           className="w-full border px-3 py-2 rounded min-h-[120px]"
           required
         />
+        <div>
+          <label className="block text-sm font-semibold mb-2">Tags</label>
+          <div className="flex flex-wrap gap-2">
+            {tags.map(tag => (
+              <label key={tag.id} className="flex items-center gap-1 cursor-pointer">
+                <input
+                  type="checkbox"
+                  value={tag.id}
+                  checked={selectedTags.includes(tag.id)}
+                  onChange={() => handleTagChange(tag.id)}
+                  className="accent-blue-600"
+                />
+                <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">{tag.name}</span>
+              </label>
+            ))}
+          </div>
+        </div>
         <div className="flex gap-2">
           <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Update</button>
           <button type="button" className="bg-gray-400 text-white px-4 py-2 rounded" onClick={() => navigate('/posts')}>Cancel</button>
