@@ -30,10 +30,10 @@ const Navbar: React.FC<{ isLoggedIn: boolean; onLogout: () => void }> = ({ isLog
   return (
     <nav className="w-full bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 shadow-lg px-4 sm:px-6 py-3 flex justify-between items-center sticky top-0 z-50 border-b-4 border-indigo-200 dark:bg-gray-900 dark:border-gray-700 transition-colors duration-500">
       {/* Logo & Hamburger */}
-      <div className="flex items-center gap-3 md:gap-6">
+      <div className="flex items-center justify-between w-full md:w-auto">
         <Link to="/" className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-md hover:scale-105 transition-transform">GabBlog</Link>
-        {/* Hamburger only on mobile */}
-        <button className="md:hidden ml-2 focus:outline-none" aria-label="Open menu" onClick={() => setMenuOpen(v => !v)}>
+        {/* Hamburger only on mobile, right aligned */}
+        <button className="md:hidden ml-auto focus:outline-none" aria-label="Open menu" onClick={() => setMenuOpen(v => !v)}>
           <span className="block w-8 h-1 bg-white rounded mb-1 transition-transform duration-300" style={{ transform: menuOpen ? 'rotate(45deg) translateY(10px)' : 'none' }}></span>
           <span className={`block w-8 h-1 bg-white rounded mb-1 transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`}></span>
           <span className="block w-8 h-1 bg-white rounded transition-transform duration-300" style={{ transform: menuOpen ? 'rotate(-45deg) translateY(-10px)' : 'none' }}></span>

@@ -126,9 +126,9 @@ const PostList: React.FC = () => {
           loader={<div className="text-center py-4">Loading...</div>}
           endMessage={<div className="text-center py-4 text-gray-400">No more posts</div>}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex overflow-x-auto gap-8 pb-4 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-100 snap-x snap-mandatory">
             {posts.map(post => (
-              <div key={post.id} className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-4 sm:p-6 md:p-7 border-2 border-blue-200 hover:border-purple-400 group relative overflow-hidden flex flex-col h-full">
+              <div key={post.id} className="min-w-[320px] max-w-xs sm:min-w-[360px] sm:max-w-sm md:min-w-[400px] md:max-w-md bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-4 sm:p-6 md:p-7 border-2 border-blue-200 hover:border-purple-400 group relative overflow-hidden flex flex-col h-full snap-center">
                 <Link to={`/posts/${post.id}`} className="text-xl sm:text-2xl md:text-3xl font-extrabold text-indigo-700 group-hover:text-purple-700 transition-colors duration-200 drop-shadow-lg break-words mb-1">
                   {post.title}
                 </Link>
