@@ -126,10 +126,10 @@ const PostList: React.FC = () => {
           loader={<div className="text-center py-4">Loading...</div>}
           endMessage={<div className="text-center py-4 text-gray-400">No more posts</div>}
         >
-          <div className="flex overflow-x-auto gap-8 pb-4 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-100 snap-x snap-mandatory">
+          <div className="flex flex-col gap-10">
             {posts.map(post => (
-              <div key={post.id} className="min-w-[320px] max-w-xs sm:min-w-[360px] sm:max-w-sm md:min-w-[400px] md:max-w-md bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-4 sm:p-6 md:p-7 border-2 border-blue-200 hover:border-purple-400 group relative overflow-hidden flex flex-col h-full snap-center">
-                <Link to={`/posts/${post.id}`} className="text-xl sm:text-2xl md:text-3xl font-extrabold text-indigo-700 group-hover:text-purple-700 transition-colors duration-200 drop-shadow-lg break-words mb-1">
+              <div key={post.id} className="w-full bg-white rounded-3xl shadow-2xl hover:shadow-[0_8px_32px_0_rgba(99,102,241,0.25)] hover:ring-4 hover:ring-purple-200 transition-all duration-300 p-6 sm:p-8 md:p-10 border-2 border-blue-100 hover:border-purple-300 group relative overflow-hidden flex flex-col">
+                <Link to={`/posts/${post.id}`} className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-indigo-700 group-hover:text-purple-700 transition-colors duration-200 drop-shadow-lg break-words mb-2">
                   {post.title}
                 </Link>
                 <div className="text-gray-500 text-xs mb-3 mt-2 flex items-center gap-2">
