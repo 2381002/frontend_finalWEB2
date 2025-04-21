@@ -25,27 +25,25 @@ const Register = () => {
       });
       alert("User successfully registered");
       navigate("/login");
-    } catch (err) {
+    } catch {
       alert("username or email already registered");
     }
   };
   const { mutate, isPending } = useMutation({ mutationFn: handleRegister });
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-md">
-        {isPending && (
-          <div className="absolute inset-0 bg-white bg-opacity-70 flex items-center justify-center z-20 rounded-2xl">
-            <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        )}
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
-          Create an Account
-        </h2>
-
-        <form
-          className="space-y-5"
-          onSubmit={handleSubmit((data) => mutate(data))}
-        >
+      <div className="max-w-md mx-auto py-16 px-4">
+        <h1 className="text-4xl font-extrabold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 drop-shadow-lg">Register</h1>
+        <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-md relative">
+          {isPending && (
+            <div className="absolute inset-0 bg-white bg-opacity-70 flex items-center justify-center z-20 rounded-2xl">
+              <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          )}
+          <form
+            className="space-y-5"
+            onSubmit={handleSubmit((data) => mutate(data))}
+          >
           <div>
             <label
               htmlFor="username"
@@ -115,7 +113,7 @@ const Register = () => {
           <div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200"
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 cursor-pointer"
             >
               Register
             </button>
@@ -125,14 +123,15 @@ const Register = () => {
         <p className="mt-4 text-center text-sm text-gray-600">
           Already have an account?{" "}
           <a
-            className="text-blue-600 hover:underline"
+            className="text-blue-600 hover:underline cursor-pointer"
             onClick={() => {
-              navigate("login");
+              navigate("/login");
             }}
           >
             Login
           </a>
         </p>
+        </div>
       </div>
     </div>
   );
